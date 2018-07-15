@@ -47,7 +47,7 @@ export default class LED {
   }
   logOutput(theObject){
     if (theObject['filled'] === 2)
-      return 2
+      return 1
     if (theObject['filled'] === 3)
       return 7
     else {
