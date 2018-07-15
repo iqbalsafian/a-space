@@ -4,6 +4,8 @@ export default class LED {
     let currentIndex = 0
     let theObject = {}
 
+    if (fileName === null)
+      throw 'File name not provided';
     try {
       let lineReader = require('readline').createInterface({
         input: require('fs').createReadStream(fileName)
@@ -14,14 +16,15 @@ export default class LED {
           currentIndex = 0
         } else {
           theObject[currentIndex] = line
+          currentIndex++
         }
-        currentIndex++
       })
       lineReader.on('close', ()=>{
         this.processInput(theObject)
       })
     } catch(err) {
       console.log('File not found');
+      throw err
       return
     }
   }
@@ -30,21 +33,24 @@ export default class LED {
     let numberList = ''
 
     for (let i = 1; i <= receivedNumbers; i++) {
-      let tempObject = {data:{0: [0, 0, 0], 1: [0, 0, 0], 2: [0, 0, 0]}, filled: 0}
+      let tempObject = {data:{0: {0:0, 1:0, 2:0}, 1: {0:0, 1:0, 2:0}, 2: {0:0, 1:0, 2:0}}, filled: 0}
       let filled = 0;
       for (let j = 0; j < 3; j++) {
-        for (let k = (i * 3 - 4 + i); k < (i * 3 + i); k++) {
+        let id = 0
+        for (let k = (i * 3 - 4 + i); k < (i * 3 - 1 + i); k++) {
           if (theObject[j][k] !== ' ') {
             filled++;
-              tempObject['data'][j][k] = 1
+            tempObject['data'][j][id] = 1
           }
+          id++
         }
+        tempObject['filled'] = filled
       }
-      tempObject['filled'] = filled
-      // numberList += this.logOutput(tempObject)
+      numberList += this.logOutput(tempObject)
     }
     console.log(numberList);
   }
+
   logOutput(theObject){
     if (theObject['filled'] === 2)
       return 1
