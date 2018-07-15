@@ -46,7 +46,13 @@ export default class LED {
     console.log(numberList);
   }
   logOutput(theObject){
-    return theObject['filled']
+    if (theObject['filled'] === 2)
+      return 2
+    if (theObject['filled'] === 3)
+      return 7
+    else {
+      return 'X'
+    }
   }
 }
 

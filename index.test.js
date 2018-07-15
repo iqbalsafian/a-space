@@ -21,8 +21,26 @@ it('Should log output when processInput method is called', () => {
   Led.processInput(mockObj)
 })
 
-it('Object "one" should return a number', () => {
+it('Should return positive number if the object is "one"', () => {
   const Led = new LED()
   const mockObj = {filled: 2, data: {0: {0: 0, 1: 0, 2: 0}, 1: {0:1, 1:0, 2:0}, 2: {0:1, 1:0, 2:0}}}
-  expect(Led.logOutput(mockObj)).toBe(2)
+  expect(Led.logOutput(mockObj)).not.toBe(0)
+})
+
+it('Should return 1 if the object is "one"', () => {
+  const Led = new LED()
+  const mockObj = {filled: 2, data: {0: {0: 0, 1: 0, 2: 0}, 1: {0:1, 1:0, 2:0}, 2: {0:1, 1:0, 2:0}}}
+  expect(Led.logOutput(mockObj)).toBe(1)
+})
+
+it('Should return 7 if the object is "7"', () => {
+  const Led = new LED()
+  const mockObj = {filled: 3, data: {0: {0: 0, 1: 1, 2: 0}, 1: {0:1, 1:0, 2:1}, 2: {0:1, 1:0, 2:1}}}
+  expect(Led.logOutput(mockObj)).toBe(7)
+})
+
+it('Should return X for unprocessed number', () => {
+  const Led = new LED()
+  const mockObj = {filled: 0, data: {0: {0: 0, 1: 0, 2: 0}, 1: {0:0, 1:0, 2:0}, 2: {0:0, 1:0, 2:0}}}
+  expect(Led.logOutput(mockObj)).toBe('X')
 })
