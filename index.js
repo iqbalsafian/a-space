@@ -56,6 +56,8 @@ export default class LED {
       return 8
     if (theObject['filled'] === 5 && theObject['data'][2][0] === 1)
       return 2
+    if (theObject['filled'] === 5 && theObject['data'][1][2] === 1 && theObject['data'][2][2] === 1)
+      return 3
     else {
       return 'X'
     }

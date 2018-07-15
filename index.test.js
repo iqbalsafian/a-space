@@ -57,6 +57,12 @@ it('Should return 2 if the object is "2"', () => {
   expect(Led.logOutput(mockObj)).toBe(2)
 })
 
+it('Should return 3 if the object is "3"', () => {
+  const Led = new LED()
+  const mockObj = {filled: 5, data: {0: {0: 0, 1: 1, 2: 0}, 1: {0:0, 1:1, 2:1}, 2: {0:0, 1:1, 2:1}}}
+  expect(Led.logOutput(mockObj)).toBe(3)
+})
+
 it('Should return X for unprocessed number', () => {
   const Led = new LED()
   const mockObj = {filled: 0, data: {0: {0: 0, 1: 0, 2: 0}, 1: {0:0, 1:0, 2:0}, 2: {0:0, 1:0, 2:0}}}
