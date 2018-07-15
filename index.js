@@ -30,7 +30,7 @@ export default class LED {
     let numberList = ''
 
     for (let i = 1; i <= receivedNumbers; i++) {
-      let tempObject = {data:{0: {0:0, 1:0, 2:0}, 1: {0:0, 1:0, 2:0}, 2: {0:0, 1:0, 2:0}}, filled: 0}
+      let tempObject = {data:{0: [0, 0, 0], 1: [0, 0, 0], 2: [0, 0, 0]}, filled: 0}
       let filled = 0;
       for (let j = 0; j < 3; j++) {
         for (let k = (i * 3 - 4 + i); k < (i * 3 + i); k++) {
@@ -41,7 +41,7 @@ export default class LED {
         }
       }
       tempObject['filled'] = filled
-      numberList += this.logOutput(tempObject)
+      // numberList += this.logOutput(tempObject)
     }
     console.log(numberList);
   }
@@ -54,6 +54,8 @@ export default class LED {
       return 4
     if (theObject['filled'] === 7)
       return 8
+    if (theObject['filled'] === 5 && theObject['data'][2][0] === 1)
+      return 2
     else {
       return 'X'
     }
