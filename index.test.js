@@ -5,7 +5,7 @@ it('Will check if the LED class has been init by calling its constructor', ()=>{
   expect(Led).toBeTruthy()
 })
 
-it('Will log an error if no file name being passed to the method runProcess', () => {
+it('Will throw an error if no file name being passed to the method runProcess', () => {
   const Led = new LED()
   expect(Led.runProcess).toThrow()
 })

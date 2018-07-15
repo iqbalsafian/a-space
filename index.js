@@ -6,6 +6,7 @@ export default class LED {
 
     if (fileName === null)
       throw 'File name not provided';
+      return
     try {
       let lineReader = require('readline').createInterface({
         input: require('fs').createReadStream(fileName)
@@ -23,8 +24,7 @@ export default class LED {
         this.processInput(theObject)
       })
     } catch(err) {
-      console.log('File not found');
-      throw err
+      throw 'File not found'
       return
     }
   }
@@ -52,29 +52,24 @@ export default class LED {
   }
 
   logOutput(theObject){
-    if (theObject['filled'] === 2)
-      return 1
-    if (theObject['filled'] === 3)
-      return 7
-    if (theObject['filled'] === 4)
-      return 4
-    if (theObject['filled'] === 7)
-      return 8
-    if (theObject['filled'] === 5 && theObject['data'][2][0] === 1)
-      return 2
-    if (theObject['filled'] === 5 && theObject['data'][1][2] === 1 && theObject['data'][2][2] === 1)
-      return 3
-    if (theObject['filled'] === 5 && theObject['data'][1][0] === 1)
+    if (theObject['filled'] === 2) return 1
+    if (theObject['filled'] === 3) return 7
+    if (theObject['filled'] === 4) return 4
+    if (theObject['filled'] === 7) return 8
+
+    if (theObject['filled'] === 5) {
+      if (theObject['data'][2][0] === 1) return 2
+      if (theObject['data'][1][2] === 1 && theObject['data'][2][2] === 1) return 3
       return 5
-    if (theObject['filled'] === 6 && theObject['data'][1][2] === 0)
-      return 6
-    if (theObject['filled'] === 6 && theObject['data'][2][0] === 0)
-      return 9
-    if (theObject['filled'] === 6 && theObject['data'][1][1] === 0)
-      return 0
-    else {
-      return 'X'
     }
+
+    if (theObject['filled'] === 6) {
+      if (theObject['data'][1][2] === 0) return 6
+      if (theObject['data'][2][0] === 0) return 9
+      return 0
+    }
+
+    return 'X'
   }
 }
 
