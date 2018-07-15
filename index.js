@@ -52,6 +52,8 @@ export default class LED {
       return 7
     if (theObject['filled'] === 4)
       return 4
+    if (theObject['filled'] === 7)
+      return 8
     else {
       return 'X'
     }
