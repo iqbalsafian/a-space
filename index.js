@@ -4,9 +4,10 @@ export default class LED {
     let currentIndex = 0
     let theObject = {}
 
-    if (fileName === null)
+    if (fileName === null) {
       throw 'File name not provided';
       return
+    }
     try {
       let lineReader = require('readline').createInterface({
         input: require('fs').createReadStream(fileName)
